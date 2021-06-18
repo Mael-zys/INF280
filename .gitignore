@@ -1,3 +1,3 @@
-.pdf
-.rar
-vscode
+*.pdf
+*.rar
+*vscode
