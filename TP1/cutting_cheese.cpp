@@ -2,6 +2,7 @@
 #include <string>
 #include <math.h>  //use M_PI
 #include <iomanip> //set output precision
+#include <fstream>
 
 using namespace std;
 
@@ -43,11 +44,15 @@ int main()
 {
     int numHole, numSlice;
     while(cin >> numHole >> numSlice) {
+    // fstream fin("input.txt");
+    // ofstream fout("output.txt");
+    // while(fin >> numHole >> numSlice) {
         double hole[numHole * 4];
         double volumnTotal = X * Y * Z;
         for (int i = 0; i < numHole; i++) {
             // each hole use 4 indexs: r, x, y, z
             cin >> hole[i * 4] >> hole[i * 4 + 1] >> hole[i * 4 + 2] >> hole[i * 4 + 3];
+            // fin >> hole[i * 4] >> hole[i * 4 + 1] >> hole[i * 4 + 2] >> hole[i * 4 + 3];
             // x and y are useless, I replace them by z_left and z_right
             hole[i * 4 + 1] = hole[i * 4 + 3] - hole[i * 4];
             hole[i * 4 + 2] = hole[i * 4 + 3] + hole[i * 4];
@@ -78,8 +83,14 @@ int main()
             }
             slice[i] = mid;
             cout << fixed << setprecision(9) << slice[i] - slice[i - 1] << endl;
+            // fout << fixed << setprecision(9) << slice[i] - slice[i - 1] << endl;
         }
         cout << fixed << setprecision(9) << Z - slice[numSlice - 1] << endl;
+        // fout << fixed << setprecision(9) << Z - slice[numSlice - 1] << endl;
     }
+    // fin.close();
+    // fout.close();
+    // g++ -o cutting cutting_cheese.cpp
+    // diff result.txt output.txt -y
     return 0;
 }
